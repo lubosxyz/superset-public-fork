@@ -25,7 +25,10 @@ export default ({ config }: ConfigContext) => ({
 	},
 	ios: {
 		supportsTablet: true,
-		bundleIdentifier: "sh.superset.mobile",
+		// Self-signed fork builds override these; upstream defaults stay intact.
+		bundleIdentifier:
+			process.env.SUPERSET_MOBILE_BUNDLE_ID ?? "sh.superset.mobile",
+		appleTeamId: process.env.SUPERSET_MOBILE_APPLE_TEAM_ID,
 		infoPlist: {
 			ITSAppUsesNonExemptEncryption: false,
 		},
